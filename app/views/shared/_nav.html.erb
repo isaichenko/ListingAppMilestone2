@@ -1,0 +1,54 @@
+<br>
+<% if user_signed_in? %>
+  <ul class="nav mr-auto custom-nav">
+    <% if current_user.has_roles?(:superadmin) %>
+      <h1>Superadmin Dashboard</h1>
+    <% else %>
+      <% if current_user.interface == "jobseeker" %>
+        <h1>Jobseeker Dashboard</h1>
+      <% else %>
+        <h1>Recruiter Dashboard</h1>
+      <% end %>
+    <li class="nav-item dropdown ml-auto">
+      <%= link_to "I am #{interface_button}", toggle_interface_user_path(current_user), class: 'btn btn-primary'  %>
+    </li>
+    <% end %>
+  </ul>
+
+  <% if current_user.has_roles?(:superadmin) %>
+    <%= render 'shared/nav_superadmin' %>
+  <% else %>
+    <% if current_user.interface == "jobseeker" %>
+      <%= render 'shared/nav_jobseeker' %>
+    <% else %>
+      <%= render 'shared/nav_recruiter' %>
+    <% end %>
+  <% end %>
+
+<% elsif current_page?(root_path) %>
+<% elsif current_page?(admin_path) %>
+  <h1 align="center">Job Listing</h1>
+<% else %>
+  <h1>Job Listing</h1>
+  <ul class="nav nav-tabs mr-auto custom-nav">
+    <li class="nav-item">
+      <%= link_to 'Homepage', root_path, class: "nav-link #{active? root_path}" %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to 'Browse Jobs', alljobs_path, class: "nav-link #{active? alljobs_path}" %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to 'Browse Companies', allcompanies_path, class: "nav-link #{active? allcompanies_path}" %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to 'Browse Resumes', allresumes_path, class: "nav-link #{active? allresumes_path}" %>
+    </li>
+
+    <li class="nav-item ml-auto">
+      <%= link_to 'Login / Sign up', new_user_session_path, class: "nav-link #{active? new_user_session_path}" %>
+    </li>
+  </ul>
+<% end %>

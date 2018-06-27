@@ -1,0 +1,20 @@
+<h2>All Jobs List</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Company</th>
+      <th scope="col">Type of Job</th>
+      <th scope="col">Job Area</th>
+      <th scope="col">Pay range USD</th>
+      <th scope="col">Posted at</th>
+      <th scope="col">Expiry Date</th>
+      <% if user_signed_in? %>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody id="jobs">
+    <%= render partial: 'all_job', collection: @all_jobs %>
+  </tbody>
+</table>

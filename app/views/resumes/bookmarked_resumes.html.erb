@@ -1,0 +1,37 @@
+<h2>Bookmarked Resumes</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Desired Job Title</th>
+      <th scope="col">Desired Salary (per month / per year) USD</th>
+      <th scope="col">Degree</th>
+      <th scope="col">Posted</th>
+      <th scope="col"></th>
+      <% if user_signed_in? %>
+        <th scope="col"></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody id="jobs">
+  	<% @bookmarked_resumes.each do |bookmarked_resume| %>
+	  	<tr>
+			  <th scope="row"><%= bookmarked_resume.first_name %> <%= bookmarked_resume.last_name %></th>
+			  <td><%= bookmarked_resume.desired_job_title %></td>
+			  <td><%= bookmarked_resume.desired_salary_per_month %> / <%= bookmarked_resume.desired_salary_per_year %></td>
+			  <td><%= bookmarked_resume.degree %></td>
+			  <td><%= bookmarked_resume.created_at %></td>
+			  <td><%= link_to '', bookmarked_resume, class: 'fa fa-eye fa-lg' %></td>
+        <% if user_signed_in? %>
+          <td>
+            <% if current_user.bookmark_resume?(bookmarked_resume) %>
+              <%= link_to '', unbookmark_resume_path(resume_id: bookmarked_resume.id), class: 'fa fa-star fa-2x unbookmark', title: 'Unbookmark!', method: :delete %>
+            <% else %>
+              <%= link_to '', bookmark_resume_path(resume_id: bookmarked_resume.id), class: 'fa fa-star fa-2x bookmark', alt: 'Bookmark!', title: 'Bookmark!' %>
+            <% end %>
+          </td>
+        <% end %>
+			</tr>
+    <% end %>
+  </tbody>
+</table>

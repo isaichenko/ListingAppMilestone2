@@ -1,0 +1,37 @@
+@import "bootstrap";
+@import "gritter";
+@import "font-awesome";
+
+.custom-nav {
+	margin-bottom: 20px;
+}
+
+.custom-home {
+	margin-top: 45px;
+}
+
+.logo {
+  margin-top: 15px;
+}
+
+.bookmark {
+	color: gray;
+}
+
+.bookmark:hover {
+	color: #ff9900;
+	text-decoration: none;
+}
+
+.unbookmark {
+	color: #ff9900;
+}
+
+.unbookmark:hover {
+	color: gray;
+	text-decoration: none;
+}
+
+.admin_icons:hover {
+	text-decoration: none;
+}
